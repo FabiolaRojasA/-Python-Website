@@ -73,17 +73,21 @@ project/
 2. Create a virtual environment
 
    python -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   source venv/bin/activate
 
-3. Install dependencies
+   On Windows:
+
+   venv\Scripts\activate
+
+4. Install dependencies
 
    pip install flask flask-login flask-sqlalchemy
 
-4. Run the application
+5. Run the application
 
    python main.py
 
-5. Open your browser
+6. Open your browser
 
    http://127.0.0.1:5000
 
