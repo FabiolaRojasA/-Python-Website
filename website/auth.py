@@ -3,6 +3,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+from email_validator import validate_email, EmailNotValidError
+
 
 auth = Blueprint('auth', __name__)
 
@@ -44,8 +46,8 @@ def signup():
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+        elif not is_valid_email(email):
+            flash('Please enter a valid email address.', category='error')
             pass
         elif len(firstname) < 2:
             flash('First Name must be greater than 1 characters.', category='error')
@@ -60,10 +62,19 @@ def signup():
             new_user = User(email=email, first_name=firstname, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit() # Save the new user to the database
-            login_user(user, remember=True) 
+            login_user(new_user, remember=True) 
             flash('Account created!', category='success') 
             return redirect(url_for('views.home'))
 
     return render_template("signup.html", user=current_user)
- 
 
+def is_valid_email(email):
+    try:
+        # Validate.
+        valid = validate_email(email)
+        # Update with the normalized form.
+        email = valid.email
+        return True
+    except EmailNotValidError as e:
+        # Email not valid.
+        return False

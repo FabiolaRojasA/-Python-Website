@@ -1,22 +1,53 @@
 {% extends "base.html" %}
 
-{% block title %} Login
- {% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <h3 aling ="center">Login</h3>
-    <div class = "form-group">
-           <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow p-4">
+            <h3 class="text-center mb-4">Login</h3>
+            
+            <form method="POST">
+                <div class="mb-2">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-2">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="position-relative">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword(this, 'password')">
+                            <!-- OJO ABIERTO -->
+                            <svg class="eye-icon eye-open" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+
+                            <!-- OJO CERRADO -->
+                            <svg  class="eye-icon eye-closed d-none" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8
+                                        a18.45 18.45 0 0 1 5.06-5.94"/>
+                                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8"/>
+                                <line x1="1" y1="1" x2="23" y2="23"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <button type="submit"
+                            class="btn btn-primary submit-btn"
+                            data-loading-text="Logging in..."
+                            data-original-text="Login">
+                        <span class="btn-text">Login</span>
+                        <span class="spinner-border spinner-border-sm d-none"></span>
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <br />
-        <button type="submit" class="btn btn-primary">Login</button>
     </div>
-</form>
+</div>
 {% endblock %}  

@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request, flash, jsonify
+from flask import Blueprint, app, flash, render_template, request, jsonify, session
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -6,17 +6,22 @@ import json
 
 views = Blueprint('views', __name__)
 
+@views.before_request
+def make_session_permanent():
+    session.permanent = True
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
 
     if request.method == 'POST':
         note = request.form.get('note')
+        color = request.form.get('color', 'note-yellow')
 
         if len(note) < 1:
             flash('Note is too short!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)
+            new_note = Note(data=note, color=color, user_id=current_user.id)
             db.session.add(new_note)
             db.session.commit()
             flash('Note added!', category='success')

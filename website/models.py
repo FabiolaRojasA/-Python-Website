@@ -3,10 +3,11 @@ from flask_login import UserMixin #import UserMixin for user session management
 from sqlalchemy.sql import func
 
 class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True) # Unique identifier for each note
-    data = db.Column(db.String(10000)) # Content of the note
-    date = db.Column(db.DateTime(timezone=True), default=func.now()) # Date the note was created, defaults to current time
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # Foreign key linking to User
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.String(10000))
+    color = db.Column(db.String(50), default='note-yellow')
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True) # Unique identifier for each user
