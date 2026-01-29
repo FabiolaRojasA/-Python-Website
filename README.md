@@ -90,14 +90,14 @@ project/
 ---
 
 ## Entry Point (main.py)
-
+```text
 from website import create_app
 
 app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)  # Debug mode for development only
-
+```
 
 The application uses the Flask Application Factory pattern, making it easier to scale, test, and maintain.
 
