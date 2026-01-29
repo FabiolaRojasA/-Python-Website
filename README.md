@@ -67,21 +67,21 @@ project/
 
 1. Clone the repository
 
-  git clone https://github.com/your-username/your-repo-name.git
-  cd your-repo-name
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
 
 2. Create a virtual environment
 
-  python -m venv venv
-  source venv/bin/activate   # On Windows: venv\Scripts\activate
+   python -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
 
 3. Install dependencies
 
-  pip install flask flask-login flask-sqlalchemy
+   pip install flask flask-login flask-sqlalchemy
 
 4. Run the application
 
-  python main.py
+   python main.py
 
 5. Open your browser
 
